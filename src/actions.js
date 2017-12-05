@@ -1,18 +1,21 @@
-export const START_NEW_GAME = 'START_NEW_GAME';
-export const TERMINATE_GAME = 'TERMINATE_GAME';
-export const SCORE_EVENT = 'SCORE_EVENT';
+import {
+    NEW_GAME,
+    REMOVE_GAME,
+    SCORE_EVENT
+} from './actionTypes'
 
-export const startGame = (gameId, players) => {
+
+export const startGame = (players, timestamp) => {
     return {
-        type: START_NEW_GAME,
-        gameId,
-        players
+        type: NEW_GAME,
+        players,
+        timestamp
     };
 };
 
-export const terminateGame = (gameId) => {
+export const removeGame = (gameId) => {
     return {
-        type: TERMINATE_GAME,
+        type: REMOVE_GAME,
         gameId
     };
 };
