@@ -1,14 +1,9 @@
-import { NEW_GAME } from '../actionTypes'
-
-let nextId = 0;
-
-const getNextId = () => {
-    return nextId++;
-}
+import { NEW_GAME } from '../actionTypes';
+import { v4 } from 'node-uuid';
 
 const gameIdMiddleware = store => next => action => {
     if (action.type === NEW_GAME) {
-        action.id = getNextId()
+        action.id = v4();
     }
     return next(action)
 }

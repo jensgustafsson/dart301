@@ -19,7 +19,7 @@ const Game = (props) => {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const ownId = parseInt(ownProps.match.params.id, 10);
+    const ownId = ownProps.match.params.id;
     return state.dartApp.games.find((g) => {
         return g.id === ownId;
     }) || {};

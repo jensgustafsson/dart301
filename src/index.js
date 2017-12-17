@@ -10,15 +10,24 @@ import gameIdMiddleware from './middleware/gameIdMiddleware'
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 import { history } from './history';
+import { loadState, saveState } from './localStorage';
+import throttle from 'lodash/throttle'
+
+const persistedState = loadState();
 
 let store = createStore(
   combineReducers({
     routing: routerReducer,
     dartApp
   }),
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  persistedState,
+  /*window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),*/
   applyMiddleware(routerMiddleware(history), gameIdMiddleware)
 )
+
+store.subscribe(throttle(() => {
+  saveState(store.getState());
+}), 1000);
 
 ReactDOM.render(
   <Provider store={store}>
