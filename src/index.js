@@ -20,8 +20,8 @@ let store = createStore(
     routing: routerReducer,
     dartApp
   }),
-  persistedState,
-  /*window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),*/
+  // persistedState,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
   applyMiddleware(routerMiddleware(history), gameIdMiddleware)
 )
 

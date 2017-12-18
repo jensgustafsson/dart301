@@ -10,7 +10,7 @@ const Game = (props) => {
     if (gameExists) {
         return (
             <div>
-                <Dartboard/>
+                <Dartboard gameId={props.id}/>
             </div>
         )
     } else {
@@ -20,9 +20,8 @@ const Game = (props) => {
 
 const mapStateToProps = (state, ownProps) => {
     const ownId = ownProps.match.params.id;
-    return state.dartApp.games.find((g) => {
-        return g.id === ownId;
-    }) || {};
+    const game = state.dartApp.games[ownId];
+    return game ? { ...game, id: ownId } : {};
 }
   
 export default connect(mapStateToProps)(Game);

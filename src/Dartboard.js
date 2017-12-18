@@ -1,6 +1,18 @@
 import * as React from 'react';
+import {connect} from 'react-redux';
+import { throwArrow } from './actions'
+
 
 class Dartboard extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.gameId = props.gameId;
+    
+    // This binding is necessary to make `this` work in the callback
+    this.handleClick = this.handleClick.bind(this);
+  }
 
   handleClick (event) {
     event.preventDefault();
@@ -35,10 +47,8 @@ class Dartboard extends React.Component {
     }
 
     type = value === 0 ? 'MISS' : type;
-
-    const res = { type, value };    
-    console.log(`Type: ${res.type}, Value: ${res.value}`); 
-    
+    const result = { type, value };
+    this.props.throwArrow(this.gameId, result);    
   }
 
   render() {
@@ -137,4 +147,10 @@ class Dartboard extends React.Component {
   }
 }
 
-export default Dartboard;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    throwArrow: (gameId, result) => dispatch(throwArrow(gameId, result)),
+  }
+}
+
+export default connect(undefined, mapDispatchToProps)(Dartboard);

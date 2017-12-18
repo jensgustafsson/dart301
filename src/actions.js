@@ -13,6 +13,15 @@ export const startGame = (players, timestamp) => {
     };
 };
 
+export const throwArrow = (gameId, res) => {
+    console.log(`GameId ${gameId} - Type: ${res.type}, Value: ${res.value}`);     
+    return {
+        type: SCORE_EVENT,
+        id: gameId,
+        res
+    };
+};
+
 export const removeGame = (gameId) => {
     return {
         type: REMOVE_GAME,
