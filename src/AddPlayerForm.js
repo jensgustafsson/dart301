@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 
-const AddPlayerForm = (props) => (
+const AddPlayerForm = props => (
   <div>
     <h3>Add player:</h3>
     <form onSubmit={props.onCreate}>
