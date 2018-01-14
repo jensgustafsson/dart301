@@ -13,6 +13,8 @@ import { history } from "./history";
 import { loadState, saveState } from "./localStorage";
 import throttle from "lodash/throttle";
 
+const DEV = true;
+
 const persistedState = loadState();
 
 let store = createStore(
@@ -20,8 +22,7 @@ let store = createStore(
     routing: routerReducer,
     dartApp
   }),
-  // persistedState,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  DEV ? window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() : persistedState,
   applyMiddleware(routerMiddleware(history), gameIdMiddleware)
 );
 
